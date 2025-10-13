@@ -5,7 +5,7 @@
 
 3) execute it with pyhton
 
-4) enjoy ;)  (only in french for the moment sorry)
+4) enjoy ;)
 
 
 # Credits 
