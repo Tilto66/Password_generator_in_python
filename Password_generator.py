@@ -148,4 +148,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    time.sleep(3)
+    time.sleep(300)
