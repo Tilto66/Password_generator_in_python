@@ -9,7 +9,6 @@
 
 5) enjoy ;)
 
-(the version with the emoji don't work very well sorry)
 
 # Credits 
 all credits to my friends who is very good at python but doesn't have a github account
