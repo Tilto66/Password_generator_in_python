@@ -9,7 +9,6 @@
 
 5) enjoy ;)
 
-(for me the script only works on VS code sorry)
 
 # Credits 
 all credits to my friends who is very good at python but doesn't have a github account
