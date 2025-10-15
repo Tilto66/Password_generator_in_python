@@ -11,4 +11,4 @@
 
 
 # Credits 
-all credits to my friends who is very good at python but doesn't have a github account
+all credits to my friends who create this script and (btw) he is very good at python but doesn't have a github account
