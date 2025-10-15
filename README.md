@@ -1,7 +1,7 @@
 # User manual
 1) download python https://www.python.org/downloads
 
-2)install the libraries by `pip install` or `py -m pip install` in the cmd
+2) install the libraries by `pip install` or `py -m pip install` in the cmd
 
 3) download the .zip and extract it everywhere you whant
 
