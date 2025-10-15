@@ -2,10 +2,9 @@ import random
 import string
 import time
 import secrets
-from emoji import emojize
 
 def generate_password(longueur=12, use_lower=True, use_upper=True, use_digits=True, use_symbols=True):
-    """Generates a secure password with specified criteria."""
+    """Génère un mot de passe sécurisé avec les critères spécifiés."""
     characters = ''
     
     if use_lower:
@@ -20,12 +19,12 @@ def generate_password(longueur=12, use_lower=True, use_upper=True, use_digits=Tr
     if not characters:
         return None
     
-    # Using secrets for better security
+    # Utilisation de secrets pour plus de sécurité
     password = ''.join(secrets.choice(characters) for _ in range(longueur))
     return password
 
 def get_yes_no(prompt):
-    """Asks for a yes/no answer robustly."""
+    """Demande une réponse oui/non de manière robuste."""
     while True:
         reponse = input(prompt).strip().lower()
         if reponse in ['o', 'oui', 'y', 'yes']:
@@ -33,10 +32,10 @@ def get_yes_no(prompt):
         elif reponse in ['n', 'non', 'no']:
             return False
         else:
-            print(emojize(":warning: Invalid answer. Please answer with 'y' (yes) or 'n' (no)."))
+            print("Reponse invalide. Veuillez repondre par 'o' (oui) ou 'n' (non).")
 
 def evaluer_force(password):
-    """Evaluates password strength."""
+    """Évalue la force d'un mot de passe."""
     score = 0
     if len(password) >= 12:
         score += 2
@@ -53,18 +52,18 @@ def evaluer_force(password):
         score += 1
     
     if score <= 2:
-        return emojize(":red_circle: Weak"), "red"
+        return "Faible", "rouge"
     elif score <= 4:
-        return emojize(":yellow_circle: Medium"), "yellow"
+        return "Moyen", "jaune"
     else:
-        return emojize(":green_circle: Strong"), "green"
+        return "Fort", "vert"
 
 def afficher_titre():
-    """Displays the program title."""
+    """Affiche le titre du programme."""
     print("\n" + "="*60)
-    print(emojize(":locked:  SECURE PASSWORD GENERATOR  :locked:").center(68))
+    print("GENERATEUR DE MOTS DE PASSE SECURISE".center(60))
     print("="*60)
-    print("Your passwords are never saved or transmitted.")
+    print("Vos mots de passe ne sont jamais enregistres ou transmis.")
     print("="*60 + "\n")
 
 def main():
@@ -73,36 +72,36 @@ def main():
     try:
         # Demande de la longueur
         while True:
-            longueur_input = input(emojize(":straight_ruler: Password length (min. 8, recommended 16+): ")).strip()
+            longueur_input = input("Longueur du mot de passe (min. 8, recommande 16+) : ").strip()
             try:
                 longueur = int(longueur_input)
                 if longueur < 4:
-                    print(emojize(":warning: Length must be at least 4 characters."))
+                    print("La longueur doit etre d'au moins 4 caracteres.")
                 elif longueur < 8:
-                    print(emojize(":warning: Warning: Less than 8 characters is considered weak."))
-                    if get_yes_no("Continue anyway? (y/n): "):
+                    print("Attention : moins de 8 caracteres est considere comme faible.")
+                    if get_yes_no("Continuer quand meme ? (o/n) : "):
                         break
                 else:
                     break
             except ValueError:
-                print(emojize(":cross_mark: Please enter a valid number."))
+                print("Veuillez entrer un nombre valide.")
         
         print()
         
         # Demande des types de caractères
-        use_lower = get_yes_no(emojize(":input_latin_lowercase: Include lowercase letters (a-z)? (y/n): "))
-        use_upper = get_yes_no(emojize(":input_latin_uppercase: Include uppercase letters (A-Z)? (y/n): "))
-        use_digits = get_yes_no(emojize(":input_numbers: Include digits (0-9)? (y/n): "))
-        use_symbols = get_yes_no(emojize(":input_symbols: Include symbols (!@#$...)? (y/n): "))
+        use_lower = get_yes_no("Inclure des minuscules (a-z) ? (o/n) : ")
+        use_upper = get_yes_no("Inclure des majuscules (A-Z) ? (o/n) : ")
+        use_digits = get_yes_no("Inclure des chiffres (0-9) ? (o/n) : ")
+        use_symbols = get_yes_no("Inclure des symboles (!@#$...) ? (o/n) : ")
         
         # Vérification qu'au moins un type est sélectionné
         if not any([use_lower, use_upper, use_digits, use_symbols]):
-            print(emojize("\n:cross_mark: Error: You must select at least one character type!"))
+            print("\nErreur : Vous devez selectionner au moins un type de caracteres !")
             return
         
         # Génération du mot de passe
         print("\n" + "-"*60)
-        print(emojize(":gear: Generating"), end="")
+        print("Generation en cours", end="")
         for _ in range(3):
             time.sleep(0.3)
             print(".", end="", flush=True)
@@ -111,41 +110,41 @@ def main():
         password = generate_password(longueur, use_lower, use_upper, use_digits, use_symbols)
         
         # Affichage des paramètres
-        print(emojize("\n:clipboard: Password parameters:"))
-        print(f"   • Length: {longueur} characters")
+        print("\nParametres du mot de passe :")
+        print(f"   - Longueur : {longueur} caracteres")
         if use_lower:
-            print("   • Lowercase letters (a-z)")
+            print("   - Minuscules (a-z)")
         if use_upper:
-            print("   • Uppercase letters (A-Z)")
+            print("   - Majuscules (A-Z)")
         if use_digits:
-            print("   • Digits (0-9)")
+            print("   - Chiffres (0-9)")
         if use_symbols:
-            print("   • Symbols (!@#$...)")
+            print("   - Symboles (!@#$...)")
         
         # Évaluation de la force
         force, couleur = evaluer_force(password)
-        print(emojize(f"\n:flexed_biceps: Password strength: {force}"))
+        print(f"\nForce du mot de passe : {force}")
         
         # Affichage du mot de passe
         print("\n" + "="*60)
-        print(emojize(":key: YOUR PASSWORD:"))
+        print("VOTRE MOT DE PASSE :")
         print("="*60)
         print(f"\n   {password}\n")
         print("="*60)
         
         # Option pour générer un autre mot de passe
         print()
-        if get_yes_no(emojize(":counterclockwise_arrows_button: Generate another password? (y/n): ")):
+        if get_yes_no("Generer un autre mot de passe ? (o/n) : "):
             print("\n" * 2)
             main()
         else:
-            print(emojize("\n:check_mark_button: Thank you for using the password generator!"))
-            print(emojize(":light_bulb: Tip: Use a password manager to store your passwords securely.\n"))
+            print("\nMerci d'avoir utilise le generateur de mots de passe !")
+            print("Conseil : Utilisez un gestionnaire de mots de passe pour stocker vos mots de passe en toute securite.\n")
     
     except KeyboardInterrupt:
-        print(emojize("\n\n:warning: Program interrupted by user."))
+        print("\n\nProgramme interrompu par l'utilisateur.")
     except Exception as e:
-        print(emojize(f"\n:cross_mark: Unexpected error: {e}"))
+        print(f"\nErreur inattendue : {e}")
 
 if __name__ == "__main__":
     main()
