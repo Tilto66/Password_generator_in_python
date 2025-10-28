@@ -87,7 +87,7 @@ try:
         time.sleep(0.2)
         print('- Des symboles')
     
-    print('\nMot de passe genere :')
+    print('\nMot de passe générer :')
     print(password)
 
 except ValueError as e:
